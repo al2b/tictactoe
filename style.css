@@ -1,0 +1,33 @@
+td {
+    border: 2px solid #333333;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: "Apple Braille", cursive;
+    cursor: pointer;
+}
+
+table {
+    border-collapse: collapse;
+    position: absolute;
+    left: 50%;
+    margin-left: -155px;
+    top: 50px;
+}
+
+.endgame {
+    display: none;
+    width: 200px;
+    top: 120px;
+    background-color: beige;
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-size: 2em;
+}
