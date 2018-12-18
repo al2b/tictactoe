@@ -5,20 +5,25 @@ var nextPlayer = null;
 const listNode = document.getElementById('tictac');
 
 listNode.addEventListener('click', function(event) {
-  changeClass(event.target.id);
-  setNextPlayer()
+  id = document.getElementById(event.target.id);
+  if (id.classList.contains(player1) || id.classList.contains(player2)) {
+    alert('déjà joué!');
+  }else{
+    changeClass(id);
+    setNextPlayer()
+  }
 });
 
 function changeClass(id) {
   if (nextPlayer === null) {
-    document.getElementById(id).classList.add(player1);
+    id.classList.add(player1);
   } else {
-    document.getElementById(id).classList.add(nextPlayer);
+    id.classList.add(nextPlayer);
   }
 }
 
 function setNextPlayer(){
-  if (nextPlayer === player1) {
+  if (nextPlayer === null || nextPlayer === player1) {
     nextPlayer = player2
   } else {
     nextPlayer = player1
