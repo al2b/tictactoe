@@ -31,3 +31,11 @@ table {
     color: white;
     font-size: 2em;
 }
+
+.player1 {
+    background-color: darkred;
+}
+
+.player2 {
+    background-color: blue;
+}
