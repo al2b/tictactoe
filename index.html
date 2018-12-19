@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="main">
+<div class="main" id="container">
     <div>
         <h1>Live dangerously : life or death !</h1>
     </div>
     <div>
-        <table>
+        <table id="game">
             <tr>
                 <td class="cell" id="0"></td>
                 <td class="cell" id="1"></td>
@@ -29,10 +29,12 @@
                 <td class="cell" id="8"></td>
             </tr>
         </table>
-
+    </div>
+    <div id="resetGame">
+        <p></p>
+        <button id="button" class="buttonReset">I love pain. Play Again !</button>
     </div>
 </div>
-<button onClick="reset()">Play Again</button>
 <script src="script.js">
 </script>
 </body>
