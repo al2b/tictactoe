@@ -1,19 +1,16 @@
 const player1 = 'player1';
 const player2 = 'player2';
 const buttonReset = 'buttonReset';
-let nextPlayer = null;
-
-let round = 0;
+const alertClass = 'alert';
 
 const tableNode = document.getElementById('game');
 const containerNode = document.getElementById('container');
 
-console.log(containerNode);
+let nextPlayer = null;
+let round = 0;
 
 containerNode.addEventListener('click', function(event) {
-
   item = document.getElementById(event.target.id);
-  console.log(item);
 
   if (item.classList.contains(buttonReset)) {
     reset();
@@ -31,17 +28,35 @@ tableNode.addEventListener('click', function(event) {
     changeClass(id);
     winner = checkWin();
     if(winner) {
-      alert('partie gagnée par ' + nextPlayer )
+      alertWin()
     } else {
       if (round < 8 ) {
         setNextPlayer();
         round = round +1;
       } else {
-        alert('alerte joueurs trop malins');
+        alertNobodyWins()
       }
     }
   }
 });
+
+function alertWin() {
+  let elementRef = document.getElementById('alert');
+  elementRef.classList.add(alertClass);
+  elementRef.innerText = 'Bravo, il y a un gagnant : ' +nextPlayer;
+}
+
+function alertNobodyWins() {
+  var elementRef = document.getElementById('alert');
+  elementRef.classList.add(alertClass);
+  elementRef.innerText = 'Joueurs trop malins 😘';
+}
+
+function alertReset() {
+  let elementRef = document.getElementById('alert');
+  elementRef.classList.remove(alertClass);
+  elementRef.innerText = '';
+}
 
 function checkWin() {
   const winCombos = [
@@ -77,6 +92,8 @@ function checkWin() {
   }
   if(comboGagnant !== 'rien') {
     return true;
+  } else {
+    return false;
   }
 }
 
@@ -100,8 +117,6 @@ function reset() {
   const elementsByPlayer1 = document.querySelectorAll(`.${player1} `);
   const elementsByPlayer2 = document.querySelectorAll(`.${player2} `);
 
-  console.log(elementsByPlayer1);
-
   elementsByPlayer1.forEach((el) => {
     el.classList.remove(player1);
     }
@@ -112,4 +127,5 @@ function reset() {
   );
 
   round = 0;
+  alertReset();
 }
