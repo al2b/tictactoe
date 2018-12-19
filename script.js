@@ -46,8 +46,6 @@ function checkWin() {
   });
 
   if (choicesPlayer.length >= 3) {
-
-    //
     winCombos.forEach(function (combo) {
         let winCount = 0;
         choicesPlayer.forEach(function (e) {
