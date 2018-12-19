@@ -16,6 +16,11 @@ table {
     top: 50px;
 }
 
+h1 {
+    color: #afeeee;
+    margin-bottom: 10%;;
+}
+
 .endgame {
     display: none;
     width: 200px;
@@ -38,4 +43,10 @@ table {
 
 .player2 {
     background-color: #afeeee;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
