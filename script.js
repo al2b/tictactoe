@@ -8,8 +8,9 @@ const containerNode = document.getElementById('container');
 
 let nextPlayer = null;
 let round = 0;
+let win = false;
 
-containerNode.addEventListener('click', function(event) {
+containerNode.addEventListener('click', function (event) {
   item = document.getElementById(event.target.id);
 
   if (item.classList.contains(buttonReset)) {
@@ -19,22 +20,24 @@ containerNode.addEventListener('click', function(event) {
   }
 });
 
-tableNode.addEventListener('click', function(event) {
+tableNode.addEventListener('click', function (event) {
   id = document.getElementById(event.target.id);
 
-  if (id.classList.contains(player1) || id.classList.contains(player2)) {
-    alert('déjà joué!');
-  } else {
-    changeClass(id);
-    winner = checkWin();
-    if(winner) {
+  if (!id.classList.contains(player1) && !id.classList.contains(player2)) {
+    if (win) {
       alertWin()
     } else {
-      if (round < 8 ) {
-        setNextPlayer();
-        round = round +1;
+      changeClass(id);
+      if (checkWin()) {
+        win = true;
+        alertWin()
       } else {
-        alertNobodyWins()
+        if (round < 8) {
+          setNextPlayer();
+          round = round + 1;
+        } else {
+          alertNobodyWins()
+        }
       }
     }
   }
@@ -43,7 +46,7 @@ tableNode.addEventListener('click', function(event) {
 function alertWin() {
   let elementRef = document.getElementById('alert');
   elementRef.classList.add(alertClass);
-  elementRef.innerText = 'Bravo, il y a un gagnant : ' +nextPlayer;
+  elementRef.innerText = 'Bravo, il y a un gagnant : ' + nextPlayer;
 }
 
 function alertNobodyWins() {
@@ -71,26 +74,26 @@ function checkWin() {
   ];
   let comboGagnant = 'rien';
 
-  const td = document.querySelectorAll(`.${nextPlayer} `);
+  const td = document.querySelectorAll(`.${nextPlayer}`);
   const choicesPlayer = [];
-  td.forEach((el)=>{
+  td.forEach((el) => {
     choicesPlayer.push(parseInt(el.id));
   });
 
   if (choicesPlayer.length >= 3) {
     winCombos.forEach(function (combo) {
-        let winCount = 0;
-        choicesPlayer.forEach(function (e) {
-            if (combo.includes(e)) {
-              winCount = winCount + 1;
-              if (winCount === 3) {
-                comboGagnant = combo;
-              }
-            }
-          })
+      let winCount = 0;
+      choicesPlayer.forEach(function (e) {
+        if (combo.includes(e)) {
+          winCount = winCount + 1;
+          if (winCount === 3) {
+            comboGagnant = combo;
+          }
+        }
+      })
     })
   }
-  if(comboGagnant !== 'rien') {
+  if (comboGagnant !== 'rien') {
     return true;
   } else {
     return false;
@@ -114,18 +117,13 @@ function setNextPlayer() {
 }
 
 function reset() {
-  const elementsByPlayer1 = document.querySelectorAll(`.${player1} `);
-  const elementsByPlayer2 = document.querySelectorAll(`.${player2} `);
-
-  elementsByPlayer1.forEach((el) => {
-    el.classList.remove(player1);
-    }
-  );
-  elementsByPlayer2.forEach((el) => {
-    el.classList.remove(player2);
+  const elements = document.querySelectorAll(`.cell `);
+  elements.forEach((el) => {
+      el.className = 'cell';
     }
   );
 
   round = 0;
+  win = false;
   alertReset();
 }
