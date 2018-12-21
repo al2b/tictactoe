@@ -46,7 +46,7 @@ tableNode.addEventListener('click', function (event) {
 function alertWin() {
   let elementRef = document.getElementById('alert');
   elementRef.classList.add(alertClass);
-  elementRef.innerText = 'Bravo, il y a un gagnant : ' + nextPlayer;
+  elementRef.innerText = 'Bravo 💪, il y a un gagnant : ' + nextPlayer;
 }
 
 function alertNobodyWins() {
@@ -61,7 +61,9 @@ function alertReset() {
   elementRef.innerText = '';
 }
 
+
 function checkWin() {
+
   const winCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -72,32 +74,26 @@ function checkWin() {
     [0, 4, 8],
     [6, 4, 2]
   ];
-  let comboGagnant = 'rien';
 
   const td = document.querySelectorAll(`.${nextPlayer}`);
+
   const choicesPlayer = [];
+
   td.forEach((el) => {
     choicesPlayer.push(parseInt(el.id));
   });
 
-  if (choicesPlayer.length >= 3) {
-    winCombos.forEach(function (combo) {
-      let winCount = 0;
-      choicesPlayer.forEach(function (e) {
-        if (combo.includes(e)) {
-          winCount = winCount + 1;
-          if (winCount === 3) {
-            comboGagnant = combo;
-          }
-        }
-      })
-    })
+  function isInIdsPlayer(id) {
+    return choicesPlayer.includes(id);
   }
-  if (comboGagnant !== 'rien') {
-    return true;
-  } else {
-    return false;
+
+  function isWin(combo) {
+    return combo.every(isInIdsPlayer);
   }
+
+  return winCombos.some(isWin);
+
+  //return winCombos.some(combo => combo.every(choicesPlayer.includes));
 }
 
 function changeClass(id) {
