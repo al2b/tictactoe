@@ -1,5 +1,12 @@
-const player1 = 'player1';
-const player2 = 'player2';
+class Player {
+  constructor(name, isHuman) {
+    this.name = name;
+    this.isHuman = isHuman;
+  }
+}
+
+const player1 = new Player('player1');
+const player2 = new Player('player2');
 const buttonReset = 'buttonReset';
 const alertClass = 'alert';
 
@@ -23,7 +30,7 @@ containerNode.addEventListener('click', function (event) {
 tableNode.addEventListener('click', function (event) {
   id = document.getElementById(event.target.id);
 
-  if (!id.classList.contains(player1) && !id.classList.contains(player2)) {
+  if (!id.classList.contains(player1.name) && !id.classList.contains(player2.name)) {
     if (win) {
       alertWin()
     } else {
@@ -98,17 +105,17 @@ function checkWin() {
 
 function changeClass(id) {
   if (nextPlayer === null) {
-    id.classList.add(player1);
+    id.classList.add(player1.name);
   } else {
     id.classList.add(nextPlayer);
   }
 }
 
 function setNextPlayer() {
-  if (nextPlayer === null || nextPlayer === player1) {
-    nextPlayer = player2
+  if (nextPlayer === null || nextPlayer === player1.name) {
+    nextPlayer = player2.name
   } else {
-    nextPlayer = player1
+    nextPlayer = player1.name
   }
 }
 
